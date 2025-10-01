@@ -63,6 +63,9 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 # Cac buoc phat trien
 ## Trien khai local
-php artisan serve
+
+Terminal 1: php artisan serve (Để ứng dụng có thể chạy).
+
+Terminal 2: npm run dev (Để trình duyệt tải được JS/CSS mới nhất).
 
 ## Trien khai sever
