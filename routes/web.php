@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -16,5 +20,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::resource('students', StudentController::class);
+Route::resource('classes', ClassController::class);
+Route::resource('teachers', TeacherController::class);
+Route::resource('users', UserController::class);
+
 
 require __DIR__.'/auth.php';

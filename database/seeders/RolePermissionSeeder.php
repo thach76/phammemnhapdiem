@@ -12,20 +12,28 @@ class RolePermissionSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run()
+    public function run(): void
     {
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
-        Permission::create(['name' => 'manage users']);
-        Permission::create(['name' => 'edit posts']);
+        $roles = [
+            'admin',
+            'teacher',
+            'student',
+            'pdt',
+            'dai_doi_truong',
+            'tieu_doan_truong',
+        ];
 
-        $admin = Role::create(['name' => 'admin']);
-        $admin->givePermissionTo(Permission::all());
+        foreach ($roles as $role) {
+            \Spatie\Permission\Models\Role::firstOrCreate(['name' => $role]);
+        }
 
-        Role::create(['name' => 'user']);
-
-        // gán role cho user id=1 (nếu có)
+        // gán role admin cho user id=1 (nếu có)
         $user = \App\Models\User::find(1);
-        if ($user) $user->assignRole('admin');
+        if ($user) {
+            $user->assignRole('admin');
+        }
     }
+
 }
