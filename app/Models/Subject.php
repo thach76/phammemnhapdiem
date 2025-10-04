@@ -5,18 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Teacher extends Model
+class Subject extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'teacher_code', 'name', 'dob', 'hometown', 'user_id', 'department_id', 'group_id'
-    ];
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+    protected $fillable = ['subject_code', 'subject_name', 'department_id', 'group_id'];
 
     public function department()
     {
@@ -26,6 +19,11 @@ class Teacher extends Model
     public function group()
     {
         return $this->belongsTo(Group::class);
+    }
+
+    public function classes()
+    {
+        return $this->belongsToMany(Classroom::class, 'class_subject');
     }
 
     public function scores()

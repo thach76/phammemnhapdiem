@@ -2,27 +2,23 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
 use App\Models\Department;
 use App\Models\Group;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class TeacherFactory extends Factory
+class SubjectFactory extends Factory
 {
     public function definition(): array
     {
         static $order = 1;
-        $faculties = ['HT', 'BC', 'XH', 'QS', 'CM']; // thay A=HT, B=BC... cho gọn
+        $faculties = ['HT', 'BC', 'XH', 'QS', 'CM'];
         $faculty = $this->faker->randomElement($faculties);
-        $group = $this->faker->numberBetween(1, 3);
-        $code = 'GV' . $faculty . $group . str_pad($order++, 2, '0', STR_PAD_LEFT);
+        $group = $this->faker->numberBetween(1,3);
+        $code = $faculty . $group . str_pad($order++, 2, '0', STR_PAD_LEFT);
 
         return [
-            'teacher_code' => $code,
-            'name' => $this->faker->name,
-            'dob' => $this->faker->date(),
-            'hometown' => $this->faker->city,
-            'user_id' => User::factory(),
+            'subject_code' => $code,
+            'subject_name' => ucfirst($this->faker->word) . ' học',
             'department_id' => Department::inRandomOrder()->first()->id ?? Department::factory(),
             'group_id' => Group::inRandomOrder()->first()->id ?? Group::factory(),
         ];

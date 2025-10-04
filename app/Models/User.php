@@ -47,4 +47,22 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // Override the method to use 'name' as the username field
+    public function username()
+    {
+        return 'name';
+    }
+
+    // 1 user có 1 student
+    public function student()
+    {
+        return $this->hasOne(\App\Models\Student::class, 'user_id');
+    }
+
+    // 1 user có 1 teacher
+    public function teacher()
+    {
+        return $this->hasOne(\App\Models\Teacher::class, 'user_id');
+    }
 }
